@@ -1,7 +1,7 @@
 import React,{useEffect} from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import ProductComponent from './ProductComponent'
-import { setProducts } from "../redux/action/productActions";
+import { setProducts,fetchProducts } from "../redux/action/productActions";
 import   axios from "axios";
 
 function ProductLisiting() {
@@ -9,18 +9,21 @@ function ProductLisiting() {
     const dispatch = useDispatch();
     console.log(products)
 
-    const fetchProducts = async() =>{
-        const response = await axios.get('https://fakestoreapi.com/products')
-        .catch((err)=>{console.log("error", err)})
-        dispatch(setProducts(response.data))
-    }
+    // const fetchProducts = async() =>{
+    //     const response = await axios.get('https://fakestoreapi.com/products')
+    //     .catch((err)=>{console.log("error", err)})
+    //     dispatch(setProducts(response.data))
+    // }
 
     useEffect(()=>{
-        fetchProducts();
+       dispatch(fetchProducts());
     },[])
   return (
-    <div className='ui grid container'>
+    <div className='ui four column grid'>
+      <div className='row'>
+
       <ProductComponent />
+      </div>
     </div>
   )
 }
